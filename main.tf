@@ -22,5 +22,5 @@ data "azurerm_resource_group" "test" {
 }
 
 data "azurerm_storage_account" "test" {
-  name                = "sugaeastasiarsgdiag"
+  name = "sugaeastasiarsgdiag"
 }
