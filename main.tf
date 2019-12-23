@@ -23,12 +23,12 @@ data "azurerm_resource_group" "test" {
 
 data "azurerm_storage_account" "test" {
   name = "sugaeastasiarsgdiag"
-  resource_group_name = "suga-eastasia-rsg"
+  resource_group_name = "${data.azurerm_resource_group.test.name}"
 }
 
 data "azurerm_virtual_network" "test" {
   name = "suga-eastasia-vnet"
-  resource_group_name = "suga-eastasia-rsg"
+  resource_group_name = "${data.azurerm_resource_group.test.name}"
 }
 
 output "virtual_network_id" {
@@ -37,6 +37,6 @@ output "virtual_network_id" {
 
 data "azurerm_subnet" "test" {
   name                 = "default"
-  resource_group_name  = "suga-eastasia-rsg"
-  virtual_network_name = "suga-eastasia-vnet"
+  resource_group_name  = "${data.azurerm_resource_group.test.name}"
+  virtual_network_name = "${data.azurerm_virtual_network.test.name}"
 }
