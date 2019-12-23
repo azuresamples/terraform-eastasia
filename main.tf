@@ -31,8 +31,12 @@ data "azurerm_virtual_network" "test" {
   resource_group_name = "suga-eastasia-rsg"
 }
 
+output "virtual_network_id" {
+  value = "${data.azurerm_virtual_network.test.id}"
+}
+
 data "azurerm_subnet" "test" {
   name                 = "default"
   resource_group_name  = "suga-eastasia-rsg"
-  virtual_network_name = "${azurerm_virtual_network.test.name}"
+  virtual_network_name = "suga-eastasia-vnet"
 }
