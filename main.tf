@@ -30,46 +30,9 @@ provider "azurerm" {
 }
 
 data "azurerm_resource_group" "test" {
-  name = "suga-rsg"
+  name = "suga-eastasia-rsg"
 }
 
-resource "azurerm_postgresql_server" "test" {
-  name                = "suga-postgresql10-test-2"
-  location            = "Japan East"
-  resource_group_name = data.azurerm_resource_group.test.name
-
-  sku {
-    name     = "GP_Gen5_2"
-    capacity = 2
-    tier     = "GeneralPurpose"
-    family   = "Gen5"
-  }
-
-  storage_profile {
-    storage_mb            = "5120"
-    backup_retention_days = 7
-    geo_redundant_backup  = "Disabled"
-    auto_grow             = "Enabled"
-  }
-
-  administrator_login          = var.admin_user
-  administrator_login_password = var.admin_password
-  version                      = "10"
-  ssl_enforcement              = "Enabled"
-}
-
-resource "azurerm_postgresql_database" "test" {
-  name                = "exampledb"
-  resource_group_name = data.azurerm_resource_group.test.name
-  server_name         = azurerm_postgresql_server.test.name
-  charset             = "UTF8"
-  collation           = "C"
-}
-
-resource "azurerm_postgresql_firewall_rule" "test" {
-  name                = "AllowJumpbox"
-  resource_group_name = data.azurerm_resource_group.test.name
-  server_name         = azurerm_postgresql_server.test.name
-  start_ip_address    = var.start_ip_address
-  end_ip_address      = var.end_ip_address
+data "azurerm_storage_account" "test" {
+  name                = "sugaeastasiarsgdiag"
 }
