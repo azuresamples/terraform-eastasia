@@ -23,10 +23,12 @@ data "azurerm_resource_group" "test" {
 
 data "azurerm_storage_account" "test" {
   name = "sugaeastasiarsgdiag"
+  resource_group_name = "${azurerm_resource_group.test.name}"
 }
 
 data "azurerm_virtual_network" "test" {
   name = "suga-eastasia-vnet"
+  resource_group_name = "${azurerm_resource_group.test.name}"
 }
 
 data "azurerm_subnet" "test" {
